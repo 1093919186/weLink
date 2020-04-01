@@ -1,0 +1,532 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>myLink</title>
+    <script src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .inform:hover{
+            background-color: dodgerblue;
+        }     /*消息图标*/
+        .小图标{
+            width: 72px;
+            height: 79px;
+            position: fixed;
+            right: 50px;
+            bottom: 100px;
+            cursor: pointer;
+        }
+        #message{
+            width:410px;
+            height: 150px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            border: 1px solid #d3d3d3;
+            margin-top: -75px;
+            margin-left: -205px;
+            border-radius: 3px;
+            opacity: 1
+        }
+    </style>
+    <script>
+        $(function(){
+            $('.personlogo').mouseenter(function(){
+                $('.personlogo').css('color','dodgerblue');
+            })
+            $('.personlogo').mouseleave(function(){
+                $('.personlogo').css('color','white');
+            })
+            $('.exit').mouseenter(function(){
+                $('.exit').css('color','dodgerblue');
+            })
+            $('.exit').mouseleave(function(){
+                $('.exit').css('color','white');
+            })
+            $('.search-but').mouseenter(function(){
+                $('.search-but').css('background-color','dodgerblue');
+            })
+            $('.search-but').mouseleave(function(){
+                $('.search-but').css('background-color','#007ed7');
+            })
+            $('input[name="keywords"]').focus(function(){
+                $('input[name="keywords"]').val('');
+                $('input[name="keywords"]').css('color','black');
+            })
+
+            $('input[name="pinglun"]').focus(function(){
+                $(this).val('');
+                $(this).css('color','black');
+                $(this).parent().find('input[name="but"]').slideDown();
+            })
+
+            $('input[name="but"]').hover(function(){
+                $('input[name="but"]').css('background-color','#e9e9e9')
+            },function(){
+                $('input[name="but"]').css('background-color','aliceblue')
+            });
+
+            $('a[name="name"]').hover(function(){
+                $(this).css('color','dodgerblue')
+            },function(){
+                $(this).css('color','black')
+            });
+
+            $('.myfrilogo').mouseenter(function(){
+                $('.myfrilogo').css('background-color','aliceblue');
+            })
+            $('.myfrilogo').mouseleave(function(){
+                $('.myfrilogo').css('background-color','white');
+            })
+
+            $('.navainfo').hover(function(){
+                $('.navainfo').css('border','1px solid dodgerblue');
+            },function(){
+                $('.navainfo').css('border','1px solid lightgrey');
+            })
+
+            $('.navadt').hover(function(){
+                $('.navadt').css('background-color','beige');
+            },function(){
+                $('.navadt').css('background-color','white');
+            })
+
+            /*返回首页*/
+            $(function () {
+                $(window).scroll(function(){
+                    if ($(window).scrollTop()>100){        /*据顶距离多长出现*/
+                        $("#置顶键").fadeIn(1500);
+                    }
+                    else
+                    {
+                        $("#置顶键").fadeOut(1500);
+                    }
+                });
+//当点击跳转链接后，回到页面顶部位置
+                $("#置顶键").click(function(){
+                    $('body,html').animate({scrollTop:0},1000);   /*置顶的距离以及完成动画的时间*/
+                    return false;             /*可有可无*/
+                });
+            });
+            $('input[name="register"]').hover(function () {
+                $('input[name="register"]').css('background-color', 'dodgerblue')
+            }, function () {
+                $('input[name="register"]').css('background-color', 'rgba(11,73,113,0.85)')
+            });
+
+            $('.update').hover(function () {
+                $(this).css('background-color', 'aliceblue')
+            }, function () {
+                $(this).css('background-color', 'rgba(11,73,113,0.85)')
+            });
+
+            $('.delete').hover(function () {
+                $(this).css('background-color', 'aliceblue')
+            }, function () {
+                $(this).css('background-color', 'white')
+            });
+
+            $('.hflogo').hover(function () {
+                $(this).css('background-color', 'aliceblue')
+            }, function () {
+                $(this).css('background-color', 'white')
+            });
+
+            $('.update').click(function(){
+                $('.updatekuang').slideDown();
+            })
+
+            $('.close').click(function(){
+                $('.updatekuang').slideUp();
+            })
+
+            $('input[name="username"]').focus(function(){
+                $('input[name="username"]').val('');
+                $('input[name="username"]').css('color','black');
+                $('input[name="username"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+            $('input[name="password"]').focus(function(){
+                $('input[name="password"]').val('');
+                $('input[name="password"]').css('color','black');
+                $('input[name="password"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+
+            $('input[name="name"]').focus(function(){
+                $('input[name="name"]').val('');
+                $('input[name="name"]').css('color','black');
+                $('input[name="name"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+            $('input[name="degree"]').focus(function(){
+                $('input[name="degree"]').val('');
+                $('input[name="degree"]').css('color','black');
+                $('input[name="degree"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+
+            $('input[name="gexing"]').focus(function(){
+                $('input[name="gexing"]').val('');
+                $('input[name="gexing"]').css('color','black');
+                $('input[name="gexing"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+            $('input[name="yzm"]').focus(function(){
+                $('input[name="yzm"]').val('');
+                $('input[name="yzm"]').css('color','black');
+                $('input[name="yzm"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+            $('input[name="email"]').focus(function(){
+                $('input[name="email"]').val('');
+                $('input[name="email"]').css('color','black');
+                $('input[name="email"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+
+            $('input[name="school"]').focus(function(){
+                $('input[name="school"]').val('');
+                $('input[name="school"]').css('color','black');
+                $('input[name="school"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+
+
+            $('a[name="login"]').hover(function () {
+                $('a[name="login"]').css('text-decoration', 'underline')
+                $('a[name="login"]').css('color', 'dodgerblue')
+            }, function () {
+                $('a[name="login"]').css('text-decoration', 'none')
+            });
+
+            $('.plbut').mouseenter(function(){
+                $(this).parent().css('background-color','aliceblue');
+                $(this).parent().parent().find('.plcont').slideDown();
+            })
+
+
+            $.windowbox = {
+//定义一个方法aa
+                zan: function ($a) {
+                    $.ajax({
+                        type:"post",
+                        url:"__APP__/Person/ajax",
+                        "data":{
+                            "p":$a
+                        },
+                        "success":function(response,status,xhr){
+                            //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                            //否则写入no
+                            if(response){
+                                $(".numzan"+$a).html(response);
+                            }
+                        }
+                    });
+                },
+
+                pinglun: function ($a) {
+                    $.ajax({
+                        type:"post",
+                        url:"__APP__/Person/addreview",
+                        "data":{
+                            "plnr":$(".plnr"+$a).val(),
+                            "circleid":$a
+                        },
+                        "success":function(response,status,xhr){
+                            //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                            //否则写入no
+                            if(response){
+                                $(".pl"+$a).append(response);
+                                $('input[name="but"]').css('display','none');
+                                $('input[name="pinglun"]').val('');
+                            }
+                        }
+                    });
+                },
+
+                numpl: function ($a) {
+                    $.ajax({
+                        type:"post",
+                        url:"__APP__/Person/numpl",
+                        "data":{
+                            "p":$a
+                        },
+                        "success":function(response,status,xhr){
+                            //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                            //否则写入no
+                            if(response){
+                                $(".numpl"+$a).html(response);
+                            }
+                        }
+                    });
+                },
+
+            }
+
+            var x=1;
+            $('.wantmore').mouseenter(function(){
+                $.ajax({
+                    "url":"__APP__/Person/wantmore",
+                    "type":"post",
+                    /*"data":"username=jack&password=3",*/
+                    "data":{
+                        "p":x
+                    },
+                    "success":function(response,status,xhr){
+                        //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                        //否则写入no
+                        $(".wantmore").before(response);
+                        x++;
+                    }
+                });
+            })
+
+            $('input[name="but"]').css('background-color','aliceblue')
+
+
+
+
+            $('.update').click(function(){
+                $('.updatekuang').slideDown();
+                var name = $("#name1").html();
+                $("input[name=name]").val(name);
+                var school = $("#school").html();
+                $("input[name=school]").val(school);
+                var email = $("#email").html();
+                $("input[name=email]").val(email);
+                var  gexing = $("#gexing").html();
+                $('input[name=gexing]').val(gexing);
+            })
+                $("[name=register]").click(function(){
+                    $.ajax({
+                        "url":"__APP__/Person/modify/userid/{$arr.userid}",
+                        "type":"post",
+                        "data":$("[name=modiform]").serialize(),
+                        "success":function(response){
+                            if(response==1){
+                                $("#message").css('display','block');
+                                $("#message-content").html("修改成功");
+                            }else{
+                                $("#message").css('display','block');
+                                $("#message-content").html("修改失败");
+                            }
+                            setInterval("daoshu()", 500);
+                        }
+                    });
+                });
+        })
+    </script>
+    <script>
+        index = 3;
+        function daoshu(){
+            index--;
+            if(index < 0)
+            {
+                //时间到了，跳转页页
+                location.href="__URL__/index";
+            }
+        }
+        //跳转查看资料首页
+        function jumpUrl(sendid){
+            location.href="__APP__/ForeignHome/index/userid/"+sendid;
+        }
+        function miss(name){
+            location.reload();
+        }
+    </script>
+</head>
+<body bgcolor="#e9e9e9">
+
+<div id="top-nav" style="width: 100%;height: 50px;background-color: dimgrey;position: fixed;z-index: 3">
+    <div style="width: 1000px;height: 50px;margin: 0 auto/*;background-color: #00ff21*/;position: relative">
+        <div id="left-nav" style="line-height: 50px;display: inline;float: left;">
+            <a href="__APP__/Content/index" style="text-decoration: none;float: left"><b style='font-size: 20px;color: #ffffff;font-family: "arial", "微软雅黑"'>we</b><b style='font-size: 30px;font-family: "arial", "微软雅黑";color:dodgerblue'>Link</b></a>
+            <form method="post" action="__APP__/Search/index/userid/{$info.userid}" style="float: left">
+                <div style="margin-top: 10px;float: left;margin-left: 70px"><input type="text" style="width: 400px;height: 30px;border-radius: 5px;color: lightgray" value="搜索您的朋友或者感兴趣的事" name="keywords"></div>
+                <div style="margin-top: 10px;float: left;margin-left: 5px;">
+                    <input type="submit" value="O" style='width: 50px;height: 30px;background-color: #007ed7;border: 0 solid #000000;border-radius: 5px;color: #ffffff;font-family: "arial", "微软雅黑";font-size: 25px;line-height: 30px;cursor: pointer' class="search-but">
+                </div>
+            </form>
+        </div>
+        <div style="position: absolute;right: 0px;width: 180px;height: 30px;margin-top: 10px">                                                                                                           <!--消失提示-->
+            <div style="width: 35px;height: 30px;float: left;line-height: 30px;" class="inform"><div class="infortx" style="width: 10px;height: 10px;background-color: #ff0000;border-radius: 50%;position: absolute;display: none"></div><a href="__APP__/Content/index"><img src="__ROOT__/public/images/消息logo.PNG"></a></div>
+            <div style="width: 60px;height: 30px;float: left;margin-left: 5px;line-height: 30px"><a href="__APP__/Person/index" style="text-decoration: none"><b style='font-family: "arial", "微软雅黑";color: #ffffff;font-size: 13px' class="personlogo">个人中心</b></a></div>
+            <div style="width: 60px;height: 30px;float: left;margin-left: 5px;line-height: 30px"><a href="__APP__/Index/index" style="text-decoration: none"><b style='font-family: "arial", "微软雅黑";color: #ffffff;font-size: 13px' class="exit">退出</b></a></div>
+        </div>
+    </div>
+</div>
+
+<div id="main" style="width: 1000px;height: auto;background-color: #e9e9e9;position: absolute;top: 70px;left: 50%;margin-left: -500px;">
+
+    <div style="width: 715px;margin: 0px 10px 10px 0;height:auto;float: left;background-color: #e9e9e9">
+        <div style="width: 713px;height: 180px;background-color: rgba(11,73,113,0.85);box-shadow: 2px 2px 2px black;">
+            <div style="width: 600px;height: 150px;position: absolute;top: 15px;left: 12px;">
+                <img src="__ROOT__/{$userinfo.iconpath}" style="width: 140px;height: 150px;float: left" onclick="">
+                <span style='font-family: "arial", "微软雅黑";font-size: 25px;color: #ffffff;margin-left: 15px' id="name1">{$userinfo.name}</span><br>
+                <span style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff;margin-left: 15px' id = "school">{$userinfo.school}</span><br>
+                <span style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff;margin-left: 15px'><k style="color: #000000">link：</k>{$userinfo.username}</span><br>
+                <span style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff;margin-left: 15px'><k style='color: #000000;'>邮箱：</k><span id="email">{$userinfo.email}</span></span><br>
+                <span style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff;margin-left: 15px'><k style='color: #000000;'>个性：</k><span id ="gexing">{$userinfo.gexing}</span></span><br>
+            </div>
+
+            <div class="update" style=";cursor:pointer ;width: 80px;height: 30px;float: right;border-left: 1px solid #000000;border-bottom: 1px solid #000000;line-height: 30px;text-align: center"><b style='font-family: "arial", "微软雅黑";color: #ffffff'>修改信息</b></div>
+
+        </div>
+
+        <a href="__APP__/Album/index" target="_blank"><div class="navadt" style="width: 355px;height: 50px;background-color: #ffffff;border:1px solid lightgrey;float: left;margin-top: 10px;line-height: 50px;text-align: center;color: greenyellow">我的相册</div></a>
+        <a href="__APP__/Information/index" ><div class="navainfo" style="width: 355px;height: 50px;background-color: #ffffff;border:1px solid lightgrey;float: left;margin-top: 10px;border-left: #ffffff;line-height: 50px;text-align: center"><span style='color: dodgerblue;font-family: "arial", "微软雅黑"'>好友请求</span></div></a>
+
+        <foreach name="circle" item="v" key="k">
+        <div style="width: 712px;height: auto;background-color: #ffffff;border: 1px solid lightgrey;float: left;margin-top: 5px">
+            <a class="delete" href="__APP__/Person/delete/circleid/{$v.circleid}" style="width: 60px;height: 30px;border: 1px solid dodgerblue;border-radius: 3px;float: right;margin: 5px;text-align: center;line-height: 30px;text-decoration: none;color: dodgerblue">删除</a>
+            <img src="__ROOT__/{$circle[$k]['icon']['iconpath']}" style="width: 80px;height: 80px;margin-top: 10px;margin: 10px;float: left">
+
+            <div style="margin-top: 10px;width: 530px;height: auto;float: left;margin-bottom: 5px"><span style='font-size: 15px;font-family: "arial", "微软雅黑";color: dodgerblue;font-family: "arial", "微软雅黑";'>{$v.fbman}</span><br><br>
+                <span>{$v.content}</span>
+            </div>
+
+            <div style="width: 692px;height: 25px;float: left;margin-left: 10px;">
+                <img src="__ROOT__/public/images/赞.PNG" style="margin-right: 5px;float: left;margin-top: -3px"><span style='margin-right: 5px;float: left;font-family: "arial", "微软雅黑";color: #808080'  class="numzan{$v.circleid}">{$v.numzan}</span>
+                <img src="__ROOT__/public/images/评论.PNG" style="margin-right: 5px;float: left;margin-top: -2px"><span style='float: left;font-family: "arial", "微软雅黑";color: grey;margin-right: 20px' class="numpl{$v.circleid}">{$v.numpl}</span>
+                <a onclick="$.windowbox.zan({$v.circleid}); " style='color: dodgerblue;font-family: "arial", "微软雅黑";float: left;margin-top: -4px;cursor: pointer'>赞</a>
+            </div>
+
+            <!--朋友圈图片-->
+            <div style="width: 520px;height: auto;float: left;margin-left: 95px;margin-bottom: 10px">
+                <foreach name="circle[$k]['images']" item="vv">
+                <img src="__ROOT__/{$vv.picpath}" style="width: 160px;height: 175px;margin-right: 5px">
+                </foreach>
+            </div>
+            <!--end-->
+
+            <div style="width: 100%;height: 25px;float: left">
+                <div class="plbut" style="width: 50px;height: 20px;float: right;border-radius: 3px;border: 1px solid dodgerblue;
+                color: dodgerblue;line-height: 20px;text-align: center;margin-right: 10px;cursor: pointer">评论</div>
+            </div>
+
+            <!--评论-->
+            <div class="plcont" style="width: 100%;height: auto;background-color: aliceblue;float: left;display: none">
+                <div style="margin: 20px auto;width: 692px;height: auto;">
+                    <span style='font-family: "arial", "微软雅黑";font-size: 13px;color: darkgrey'>显示之前评论</span><br>
+                    <div style="width: 100%;height: auto;" class="pl{$v.circleid}">
+                        <foreach name="circle[$k]['reviews']" item="vvv">
+                        <div style="width: 100%;height: auto;margin-bottom: 10px;float: left">
+                            <img src="__ROOT__/{$vvv.iconpath}" style="width: 40px;height: 40px;float: left">
+                            <div style="width: 645px;height: auto;float: left;margin-left: 5px">
+                                <a href="__APP__/Content/panduan/plman/{$vvv.plman}"  style='font-family: "arial", "微软雅黑";color: dodgerblue;font-size: 15px;text-decoration: none'>{$vvv.plman}</a><br>
+                                <div style="width: 645px;"><span style='font-family: "arial", "微软雅黑";color: #000000;font-size: 13px;'>{$vvv.content}</span></div>
+                            </div>
+                        </div>
+                        </foreach>
+                    </div>
+                </div>
+
+                    <input class="plnr{$v.circleid}" name='pinglun' type="text" style="margin-bottom:10px;width: 688px;height: 30px;margin-left: 12px;border: 1px solid lightgrey;border-radius: 5px;box-shadow: 2px 2px 2px lightgrey;color: lightgrey" value="添加评论">
+                    <input onclick="$.windowbox.pinglun({$v.circleid});$.windowbox.numpl({$v.circleid}) " name="but" type="submit" style="width: 50px;height: 25px;background-color:aliceblue ;margin-top: 10px;margin-left: 10px;margin-bottom: 10px;display: none;border-radius: 3px;border: 1px solid lightgrey" value="评论">
+
+            </div>
+            <!--评论end-->
+        </div>
+        <!--朋友圈end-->
+        </foreach>
+
+        <!--加载更多-->
+        <button style='width: 690px;height: 40px;margin: 5px auto;margin-left: 12px;background-color: #ffffff;border: 1px solid dodgerblue;
+        color: dodgerblue;font-size: 20px;font-family: "arial", "微软雅黑";cursor: pointer' class="wantmore">想&nbsp;看&nbsp;更&nbsp;多</button>
+        <!--/加载更多-->
+
+    </div>
+
+
+
+    <div style="width: 272px;height: 50px;float: left;background-color: #ffffff;border: 1px solid dodgerblue;margin-bottom: 10px;line-height: 50px;text-align: center" class="myfrilogo">
+        <span style='font-family: "arial", "微软雅黑";color: dodgerblue;font-size: 20px'>{$friendnum-1}<span style="color: #000000;font-size: 10px">位好友</span></span>
+    </div>
+
+
+
+    <div style="width: 275px;height: 500px;float: left;background-color: #ffffff;position: relative;overflow: scroll;" class="friend">
+        <div style="width: 255px;height: auto;background-color: #ffffff">
+            <!--1条通讯录-->
+            <foreach name="friend" item="value">
+            <if condition="$value['name'] eq $arr['name']">
+                <div style="width: 235px;height: 80px;border-bottom: 1px solid lightgrey;margin-left: 10px;">
+                    <a href="__APP__/FriendHome/index/friendid/{$value.friendid}"><img src="__ROOT__/{$value.iconpath}" style="width: 60px;height: 60px;border-radius: 50%;margin: 10px;float: left"></a>
+                    <a href="__APP__/FriendHome/index/friendid/{$value.friendid}" style="text-decoration: none;color: #000000" name="name"><span style='font-size: 15px;font-family: "arial", "微软雅黑";float: left;margin-top: 10px'>{$value.name}</span></a><br><br>
+                    <span style='font-size: 15px;font-family: "arial", "微软雅黑";color: lightgrey;float: none'>{$value.gexing}</span>
+                </div>
+
+            <else/>
+            <div style="width: 235px;height: 80px;border-bottom: 1px solid lightgrey;margin-left: 10px;">
+                <a href="__APP__/FriendHome/index/friendid/{$value.friendid}"><img src="__ROOT__/{$value.iconpath}" style="width: 60px;height: 60px;border-radius: 50%;margin: 10px;float: left"></a>
+                <a href="__APP__/FriendHome/index/friendid/{$value.friendid}" style="text-decoration: none;color: #000000" name="name"><span style='font-size: 15px;font-family: "arial", "微软雅黑";float: left;margin-top: 10px'>{$value.name}</span></a><br><br>
+                <a href="__APP__/Person/delfri/linkid/{$value.linkid}" style="float: right;text-decoration: none;font-size: 10px;color: darkred;margin-top: 5px">删除</a>
+                <span style='font-size: 15px;font-family: "arial", "微软雅黑";color: lightgrey;float: none'>{$value.gexing}</span>
+            </div>
+            </if>
+            <!--通讯录end-->
+            </foreach>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="updatekuang" style="width: 410px;height: auto;background-color: #ffffff;position: fixed;left: 50%;margin-left: -205px;top: 50%;margin-top: -218px;border: 1px solid lightgrey;display: none">
+    <div style="width: 410px;height: 40px;background-color:rgba(11,73,113,0.85);line-height: 40px;text-align: center"><b style='font-size: 20px;font-family: "arial", "微软雅黑";color: #ffffff'>信息修改</b></div>
+
+    <form action="" name="modiform">
+        <!--<input name="name" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: black;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' value="马西骑">-->
+        <!--<k style='font-family: "arial", "微软雅黑";font-size: 10px;color: darkred;margin-left: 25px'>昵称具有唯一性哈</k>-->
+        <input name="password" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: black;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' value="mxq741852963">
+        <input name="school" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: black;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' value="中南大学" >
+        <input name="email" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: black;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' value="1093919186@qq.com">
+        <input name="gexing" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: black;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' value="爱是一道光">
+        <input name="register" type="button" style='width: 160px;height: 35px;margin: 10px auto;margin-left: 25px;color: #ffffff;background-color:rgba(11,73,113,0.85);border: 1px solid rgba(11,73,113,0.85);border-radius: 3px;
+            font-family: "arial", "微软雅黑";cursor: pointer' value="修&nbsp;&nbsp;改">
+        <button class="close" type="button" style='width: 157px;height: 35px;margin: 10px auto;margin-left: 25px;color: #ffffff;background-color:rgba(11,73,113,0.85);border: 1px solid rgba(11,73,113,0.85);border-radius: 3px;
+            font-family: "arial", "微软雅黑";cursor: pointer'>关&nbsp;&nbsp;闭</button>
+    </form>
+</div>
+
+<!--返回顶部-->
+<div id="置顶键" style="display: none;">
+    <img src="__ROOT__/public/images/返回顶部.PNG" class="小图标">
+</div>
+
+<div id = "message" style="display: none;background-color: white">
+    <div style="width: 100%;height: 50px;background-color:  rgba(11,73,113,0.85);line-height: 50px;text-align: center;"><b style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff'>提示消息</b>
+    </div>
+    <span style="display: inline-block; width: 100%;height: 60px; text-align: center; line-height: 100px; font:40px 'microsoft yahei';color:#696969; " id="message-content"></span>
+    <input  onclick = "miss('message')"class="hflogo" type="button" value="关闭" style="width: 70px;height: 30px; border:1px solid dodgerblue;border-radius: 5px;float: right;cursor: ;pointer;background-color: white; margin-right: 10px;margin-bottom: 10px;" />
+</div>
+</body>
+</html>
+<!--即时通讯-->
+<script>
+    $().ready(function(){
+        t=setInterval("show()",3500);
+    })
+</script>
+<script>
+    function show() {
+        $.ajax({
+            "url":"__APP__/Content/info",
+            cache:false,
+            dataType:"html",
+            "type":"post",
+            /*"data":"username=jack&password=3",*/
+            "data":{
+                "p":1
+            },
+            "success":function(response,status,xhr){
+                //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                //否则写入no
+                if(response==1) {
+                    $(".infortx").css('display','block');
+                    clearInterval(t)
+                }else if(response==3) {
+                    $(".navainfo").css('background-color','#e03550');
+                    clearInterval(t)
+                }
+            }
+        });
+
+    }
+</script>

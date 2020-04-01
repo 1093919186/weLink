@@ -1,0 +1,73 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <script src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-image: url("__ROOT__/public/images/登录页背景.jpg");
+            background-position-x: 50%;
+            background-position-y: 100%;
+            background-size: initial;
+            background-repeat-x: no-repeat;
+            background-repeat-y: no-repeat;
+            background-attachment: fixed;
+            background-origin: initial;
+            background-clip: initial;
+            background-color: transparent;
+            background-size: 100% 100%;
+        }
+    </style>
+    <script>
+        $(function () {
+            $('input[name="login"]').hover(function () {
+                $('input[name="login"]').css('background-color', 'dodgerblue')
+            }, function () {
+                $('input[name="login"]').css('background-color', 'rgba(11,73,113,0.85)')
+            });
+            $('input[name="username"]').focus(function(){
+                $('input[name="username"]').val('');
+                $('input[name="username"]').css('color','black');
+                $('input[name="username"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+            $('input[name="password"]').focus(function(){
+                $('input[name="password"]').val('');
+                $('input[name="password"]').css('color','black');
+                $('input[name="password"]').css('border','1px solid rgba(11,73,113,0.85)');
+            })
+
+            $('a[name="register"]').hover(function () {
+                $('a[name="register"]').css('text-decoration', 'underline')
+                $('a[name="register"]').css('color', 'dodgerblue')
+            }, function () {
+                $('a[name="register"]').css('text-decoration', 'none')
+            });
+        })
+    </script>
+</head>
+<body>
+<div style="width: 400px;height: 300px;background-color: lightgrey;position: absolute;left: 50%;margin-left: -200px;top: 50%;margin-top: -150px;border-radius: 5px;opacity: 0.9"></div>
+<div style="width: 400px;height: 300px;position: absolute;top: 50%;margin-top: -150px;left: 50%;margin-left: -200px">
+    <div style="width: 400px;height: 100px;line-height: 100px;text-align:center;">
+        <b style='font-size: 80px;font-family: "arial", "微软雅黑";color: #000000'>we</b><b style='font-size: 80px;font-family: "arial", "微软雅黑";color: rgba(11,73,113,0.85)'>link</b>
+    </div>
+    <div style="width: 400px;height: 150px;">
+        <form method="post" action="__APP__/Index/login">
+            <input name="username" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: lightgrey;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入用户名">
+            <input type="password" name="password" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: lightgrey;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入密码">
+            <input name="login" type="submit" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: lightgrey;background-color:rgba(11,73,113,0.85);border: 1px solid rgba(11,73,113,0.85);border-radius: 3px;
+        font-family: "arial", "微软雅黑";cursor: pointer' value="登&nbsp;&nbsp;录">
+        </form>
+    </div>
+    <div style="width: 400px;height: 40px;line-height: 40px;text-align: center">
+        <span style='font-size: 10px;font-family: "arial", "微软雅黑";color: #808080'>没有账号?</span>
+        <a href="__APP__/Register/index" style="text-decoration: none" name="register"><span style='font-size: 10px;font-family: "arial", "微软雅黑";color: dodgerblue;'>立刻注册</span></a>
+    </div>
+</div>
+
+</body>
+</html>

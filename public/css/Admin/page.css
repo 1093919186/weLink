@@ -1,0 +1,75 @@
+.num{
+    padding-left: 5px;
+    padding-right: 5px;
+    color:grey;
+    border: 1px solid white;
+    border-radius: 2px;
+    font-size: 8px;
+    margin-right: 5px;
+    float: left;
+}
+.current{
+    color:white;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-radius: 2px;
+    font-size: 10px;
+    margin-right: 5px;
+    background-color: #AECAE8;
+    float: left;
+}
+
+.next{
+    font-family: "微软雅黑", "黑体";
+    border-radius: 2px;
+    font-size: 15px;
+    color: black;
+    margin-right: 5px;
+    float: left;
+
+}
+
+.prev{
+    font-family: "微软雅黑", "黑体";
+    border-radius: 2px;
+    font-size: 15px;
+    color:black;
+    margin-right: 5px;
+    float: left;
+}
+
+.first{
+    font-family: "微软雅黑", "黑体";
+    border-radius: 2px;
+    font-size: 15px;
+    color: black;
+    margin-right: 5px;
+    float: left;
+}
+
+.end{
+    font-family: "微软雅黑", "黑体";
+    border-radius: 2px;
+    font-size: 15px;
+    color: black;
+}
+
+.rows{
+    float: right;
+    font-family: "微软雅黑", "黑体";
+
+}
+
+.num:hover{
+    background-color: #AECAE8;
+    color: white;
+    border: 1px solid #AECAE8;
+}
+
+.first,.end,.prev:hover{
+    color: #AECAE8;
+}
+.next:hover{
+    color:#AECAE8 ;
+}
+

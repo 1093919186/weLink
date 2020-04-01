@@ -1,0 +1,383 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>weLink</title>
+    <style>
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .inform:hover{
+            background-color: dodgerblue;
+        }
+        .小图标{
+            width: 72px;
+            height: 79px;
+            position: fixed;
+            right: 50px;
+            bottom: 100px;
+            cursor: pointer;
+        }
+
+
+        #pic{
+            width:80px;
+            height:80px;
+            border-radius: 50%;
+            margin:20px auto;
+            cursor: pointer;
+        }
+    </style>
+    <script src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <script>
+
+        //建立一個可存取到該file的url
+        function getObjectURL(file) {
+            var url = null;
+            if (window.createObjectURL!=undefined) { // basic
+                url = window.createObjectURL(file) ;
+            } else if (window.URL!=undefined) { // mozilla(firefox)
+                url = window.URL.createObjectURL(file) ;
+            } else if (window.webkitURL!=undefined) { // webkit or chrome
+                url = window.webkitURL.createObjectURL(file) ;
+            }
+            return url ;
+        }
+    </script>
+</head>
+<body bgcolor="#e9e9e9">
+<!--导航条-->
+<div id="top-nav" style="width: 100%;height: 50px;background-color: dimgrey;position: fixed;z-index: 3">
+    <div style="width: 1000px;height: 50px;margin: 0 auto/*;background-color: #00ff21*/;position: relative">
+        <div id="left-nav" style="line-height: 50px;display: inline;float: left;">
+            <a href="__APP__/Content/index" style="text-decoration: none;float: left"><b style='font-size: 20px;color: #ffffff;font-family: "arial", "微软雅黑"'>we</b><b style='font-size: 30px;font-family: "arial", "微软雅黑";color:dodgerblue'>Link</b></a>
+            <form method="post" action="__APP__/Search/index/userid/{$info.userid}" style="float: left">
+                <div style="margin-top: 10px;float: left;margin-left: 70px"><input type="text" style="width: 400px;height: 30px;border-radius: 5px;color: lightgray" value="搜索您感兴趣的人" name="keywords"></div>
+                <div style="margin-top: 10px;float: left;margin-left: 5px;">
+                    <input type="submit" value="O" style='width: 50px;height: 30px;background-color: #007ed7;border: 0 solid #000000;border-radius: 5px;color: #ffffff;font-family: "arial", "微软雅黑";font-size: 25px;line-height: 30px;cursor: pointer' class="search-but">
+                </div>
+            </form>
+        </div>
+        <div style="position: absolute;right: 0px;width: 180px;height: 30px;margin-top: 10px">                                                                                                           <!--消失提示-->
+            <div style="width: 35px;height: 30px;float: left;line-height: 30px;" class="inform"><div class="infortx" style="width: 10px;height: 10px;background-color: #ff0000;border-radius: 50%;position: absolute;display: none"></div><a href="__APP__/Content/index"><img src="__ROOT__/public/images/消息logo.PNG"></a></div>
+            <div style="width: 60px;height: 30px;float: left;margin-left: 5px;line-height: 30px"><a href="__APP__/Person/index" style="text-decoration: none"><b style='font-family: "arial", "微软雅黑";color: #ffffff;font-size: 13px' class="personlogo">个人中心</b></a></div>
+            <div style="width: 60px;height: 30px;float: left;margin-left: 5px;line-height: 30px"><a href="__APP__/Index/index" style="text-decoration: none"><b style='font-family: "arial", "微软雅黑";color: #ffffff;font-size: 13px' class="exit">退出</b></a></div>
+        </div>
+    </div>
+</div>
+
+<!--主体-->
+
+<div id="main" style="width: 1000px;height:auto;position: absolute;top: 80px;left: 50%;margin-left: -500px;">
+    <div style="width: 715px;margin: 0px 10px 10px 0;height:auto;float: left;">
+        <div style="width: 511px;height: 110px;background-color: #ffffff;border: 1px solid lightgrey;float: left">
+            <img id="pic" src="__ROOT__/{$userinfo.iconpath}" style="width: 80px;height: 80px;border-radius: 50%;margin-left: 15px;margin-top: 15px;float: left">
+
+            <form method="post" action="__APP__/content/modifyicon/userid/{$arr.userid}" enctype="multipart/form-data">
+                <input id="upload" name="file" accept="image/*" type="file" style="display: none"/>
+                <div style="float: left;margin-left: 15px;margin-top: 15px">
+                    <b style='font-family: "arial", "微软雅黑";font-size: 20px;color: darkgrey;'>{$userinfo.name}</b><br>
+                    <b style='font-family: "arial", "微软雅黑";color: darkgrey;'>{$userinfo.school}</b><br>
+                    <input class="updateface" type="submit" style="width: 60px;height: 25px;margin-top: 13px;background-color: #ffffff;
+                border: 1px solid dodgerblue;border-radius: 3px;color: dodgerblue;font-family: bold;cursor: pointer" value="修改头像">
+                </div>
+            </form>
+
+        </div>
+        <!--好友-->
+        <a href="__APP__/Person/index"><div class="nava" style="width: 200px;height: 110px;background-color: #ffffff;border: 1px solid lightgrey;border-left: #ffffff;float: left;line-height: 110px;text-align: center">
+            <b style='font-size: 30px;font-family: "arial", "微软雅黑";color: dodgerblue'>{$friendnum-1}</b><b style='font-size: 10px;font-family: "arial", "微软雅黑"'>位好友</b>
+        </div></a>
+
+        <a href="__APP__/CircleSend/index" ><div name="navadt" style='width: 357px;height: 50px;background-color: #ffffff;border:1px solid lightgrey;float: left;margin-top: 10px;line-height: 50px;text-align: center;color: dodgerblue;font-family: "arial", "微软雅黑"'><img src="__ROOT__/public/images/分享动态logo.PNG">发布动态</div></a>
+        <a href="__APP__/Information/index" ><div name="navainfo" style="width: 353px;height: 50px;background-color: #ffffff;border:1px solid lightgrey;float: left;margin-top: 10px;border-left: #ffffff;line-height: 50px;text-align: center"><span style='color: dodgerblue;font-family: "arial", "微软雅黑"'>好友请求</span></div></a>
+        <!--有消息背景变红-->
+
+        <volist name="circle" id="vo" key="k" >
+
+        <!--一条朋友圈-->
+        <div style="width: 712px;height: auto;background-color: #ffffff;border: 1px solid lightgrey;float: left;margin-top: 5px">
+            <a href="__APP__/FriendHome/tiaozhuan/friendid/{$vo.fbman}"><img src="__ROOT__/{$vo.fbmanicon}" style="width: 80px;height: 80px;margin-top: 10px;margin: 10px;float: left"></a>
+
+            <div style="margin-top: 7px;width: 590px;height: auto;float: left;margin-bottom: 5px"><a style="text-decoration: none" href="__APP__/FriendHome/tiaozhuan/friendid/{$vo.fbman}"><span style='font-size: 15px;font-family: "arial", "微软雅黑";color: dodgerblue;font-family: "arial", "微软雅黑"'>{$vo.fbman}</span></a><br><br>
+                <span>{$vo.content}</span>
+            </div>
+
+            <div style="width: 692px;height: 25px;float: left;margin-left: 10px">
+                <img src="__ROOT__/public/images/赞.PNG" style="margin-right: 5px;float: left;margin-top: -3px"><span class="numzan{$vo.circleid}" style='margin-right: 5px;float: left;font-family: "arial", "微软雅黑";color: #808080'>{$vo['numzan']}</span>
+                <img src="__ROOT__/public/images/评论.PNG" style="margin-right: 5px;float: left;margin-top: -2px"><span style='float: left;font-family: "arial", "微软雅黑";color: grey;margin-right: 20px' class="numpl{$vo.circleid}">{$vo['numpl']}</span>
+                <a onclick="$.windowbox.zan({$vo.circleid}); " style='color: dodgerblue;font-family: "arial", "微软雅黑";float: left;margin-top: -4px;cursor: pointer'>赞</a>
+            </div>
+
+            <!--朋友圈图片-->
+            <div style="width: 520px;height: auto;margin-left: 95px;margin-bottom: 10px;float: left">
+                <volist name="vo['img']" id="voo" key="k2">
+                <img src="__ROOT__/{$voo.picpath}" style="width: 160px;height: 175px;margin-right: 5px;">
+                </volist>
+            </div>
+            <!--end-->
+
+            <div style="width: 100%;height: 25px;float: left">
+                <div class="plbut" style="width: 50px;height: 20px;float: right;border-radius: 3px;border: 1px solid dodgerblue;
+                color: dodgerblue;line-height: 20px;text-align: center;margin-right: 10px;cursor: pointer">评论</div>
+            </div>
+
+
+            <!--评论-->
+            <div class="plcont" style="width: 100%;height: auto;background-color: aliceblue;float: left;display: none">
+                <div style="margin: 20px auto;width: 692px;height: auto;">
+                    <span style='font-family: "arial", "微软雅黑";font-size: 13px;color: darkgrey'>显示之前评论</span><br>
+                    <div style="width: 100%;height: auto;" class="pl{$vo.circleid}">
+                        <volist name="vo.review" id="voo" key="k3">
+                        <div style="width: 100%;height: auto;margin-bottom: 10px;float: left" >
+                            <img src="__ROOT__/{$voo.iconpath}" style="width: 40px;height: 40px;float: left">
+                            <div style="width: 645px;height: auto;float: left;margin-left: 5px">
+                                <a href="__APP__/Content/panduan/plman/{$voo.plman}"  style='font-family: "arial", "微软雅黑";color: dodgerblue;font-size: 15px;text-decoration: none'>{$voo.plman}</a><br>
+                                <div style="width: 645px;"><span style='font-family: "arial", "微软雅黑";color: #000000;font-size: 13px;'>{$voo.content}</span></div>
+                            </div>
+                        </div>
+                        </volist>
+
+                    </div>
+
+                </div>
+
+                    <input class="plnr{$vo.circleid}" name='pinglun' type="text" style="margin-bottom:10px;width: 688px;height: 30px;margin-left: 12px;border: 1px solid lightgrey;border-radius: 5px;box-shadow: 2px 2px 2px lightgrey;color: lightgrey" value="添加评论">
+                    <input onclick="$.windowbox.pinglun({$vo.circleid});$.windowbox.numpl({$vo.circleid}) " name="but" type="submit" style="width: 50px;height: 25px;background-color:aliceblue ;margin-top: 10px;margin-left: 10px;margin-bottom: 10px;display: none;border-radius: 3px;border: 1px solid lightgrey" value="评论">
+            </div>
+            <!--评论end-->
+
+        </div>
+        <!--朋友圈end-->
+        </volist>
+
+
+        <button style='width: 690px;height: 40px;margin: 5px auto;margin-left: 12px;background-color: #ffffff;border: 1px solid dodgerblue;
+        color: dodgerblue;font-size: 20px;font-family: "arial", "微软雅黑";cursor: pointer' class="wantmore">想&nbsp;看&nbsp;更&nbsp;多</button>
+
+    </div>
+    <!--左侧-->
+
+    <!--右侧广告区-->
+    <div style="width: 275px;height: 200px;position: fixed;right: 50%;margin-right: -500px" class="轮播区">
+        <div id="allswapImg">
+            <div class="swapImg"><a href="{$lunbo.link}"><img src="__ROOT__/{$lunbo.picpath}" style="width: 275px;height: 200px"/></a></div>
+        </div>
+    </div>
+
+
+</div>
+<!--返回首页-->
+<div id="置顶键" style="display: none;">
+    <img src="__ROOT__/public/images/返回顶部.PNG" class="小图标">
+</div>
+</body>
+<script>
+    $(function(){
+        $('.personlogo').mouseenter(function(){
+            $('.personlogo').css('color','dodgerblue');
+        })
+        $('.personlogo').mouseleave(function(){
+            $('.personlogo').css('color','white');
+        })
+        $('.exit').mouseenter(function(){
+            $('.exit').css('color','dodgerblue');
+        })
+        $('.exit').mouseleave(function(){
+            $('.exit').css('color','white');
+        })
+        $('.search-but').mouseenter(function(){
+            $('.search-but').css('background-color','dodgerblue');
+        })
+        $('.search-but').mouseleave(function(){
+            $('.search-but').css('background-color','#007ed7');
+        })
+        $('input[name="keywords"]').focus(function(){
+            $('input[name="keywords"]').val('');
+            $('input[name="keywords"]').css('color','black');
+        })
+
+        $('input[name="pinglun"]').focus(function(){
+            $(this).val('');
+            $(this).css('color','black');
+            $(this).parent().find('input[name="but"]').slideDown();
+        })
+
+        $('input[name="but"]').hover(function(){
+            $('input[name="but"]').css('background-color','#e9e9e9')
+        },function(){
+            $('input[name="but"]').css('background-color','aliceblue')
+        });
+
+        $('div[name="navadt"]').hover(function(){
+            $('div[name="navadt"]').css('border','1px solid #007ed7')
+        },function(){
+            $('div[name="navadt"]').css('border','1px solid lightgrey')
+        });
+
+        $('div[name="navainfo"]').hover(function(){
+            $('div[name="navainfo"]').css('border','1px solid #007ed7')
+        },function(){
+            $('div[name="navainfo"]').css('border','1px solid lightgrey')
+        });
+
+        $('.updateface').hover(function(){
+            $(this).css('background-color',' rgba(11,73,113,0.85)')
+        },function(){
+            $(this).css('background-color','white')
+        });
+
+        $('.nava').mouseenter(function(){
+            $('.nava').css('background-color','#e9e9e9');
+        })
+        $('.nava').mouseleave(function(){
+            $('.nava').css('background-color','white');
+        })
+
+        $("#pic").click(function () {
+            $("#upload").click();  //隐藏了input:file样式后，点击头像就可以本地上传
+            $("#upload").on("change",function(){
+                var objUrl = getObjectURL(this.files[0]) ; //获取图片的路径，该路径不是图片在本地的路径
+                if (objUrl) {
+                    $("#pic").attr("src", objUrl) ; //将图片路径存入src中，显示出图片
+                }
+            });
+        });
+
+        $('.plbut').mouseenter(function(){
+            $(this).parent().css('background-color','aliceblue');
+            $(this).parent().parent().find('.plcont').slideDown();
+        })
+
+        /*返回首页*/
+        $(function () {
+            $(window).scroll(function(){
+                if ($(window).scrollTop()>100){        /*据顶距离多长出现*/
+                    $("#置顶键").fadeIn(1500);
+                }
+                else
+                {
+                    $("#置顶键").fadeOut(1500);
+                }
+            });
+//当点击跳转链接后，回到页面顶部位置
+            $("#置顶键").click(function(){
+                $('body,html').animate({scrollTop:0},1000);   /*置顶的距离以及完成动画的时间*/
+                return false;             /*可有可无*/
+            });
+        });
+
+        $.windowbox = {
+//定义一个方法aa
+            zan: function ($a) {
+                $.ajax({
+                    type:"post",
+                    url:"__APP__/Content/ajax",
+                    "data":{
+                        "p":$a
+                    },
+                    "success":function(response,status,xhr){
+                        //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                        //否则写入no
+                        if(response){
+                            $(".numzan"+$a).html(response);
+                        }
+                    }
+                });
+            },
+
+            pinglun: function ($a) {
+                $.ajax({
+                    type:"post",
+                    url:"__APP__/Content/addreview",
+                    "data":{
+                        "plnr":$(".plnr"+$a).val(),
+                        "circleid":$a
+                    },
+                    "success":function(response,status,xhr){
+                        //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                        //否则写入no
+                        if(response){
+                            $(".pl"+$a).append(response);
+                            $('input[name="but"]').css('display','none');
+                            $('input[name="pinglun"]').val('');
+                        }
+                    }
+                });
+            },
+
+            numpl: function ($a) {
+                $.ajax({
+                    type:"post",
+                    url:"__APP__/Content/numpl",
+                    "data":{
+                        "p":$a
+                    },
+                    "success":function(response,status,xhr){
+                        //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                        //否则写入no
+                        if(response){
+                            $(".numpl"+$a).html(response);
+                        }
+                    }
+                });
+            },
+
+        }
+
+        var x=1;
+        $('.wantmore').mouseenter(function(){
+            $.ajax({
+                "url":"__APP__/Content/wantmore",
+                "type":"post",
+                /*"data":"username=jack&password=3",*/
+                "data":{
+                    "p":x
+                },
+                "success":function(response,status,xhr){
+                    //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                    //否则写入no
+                    $(".wantmore").before(response);
+                    x++;
+                }
+            });
+        })
+
+        $('input[name="but"]').css('background-color','aliceblue')
+
+    })
+</script>
+
+<!--即时通讯-->
+<script>
+    $().ready(function(){
+        t=setInterval("show()",3500);
+    })
+</script>
+<script>
+    function show() {
+        $.ajax({
+            "url":"__APP__/Content/info",
+            cache:false,
+            dataType:"html",
+            "type":"post",
+            /*"data":"username=jack&password=3",*/
+            "data":{
+                "p":1
+            },
+            "success":function(response,status,xhr){
+                //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                //否则写入no
+                if(response==1) {
+                    $(".infortx").css('display','block');
+                    clearInterval(t)
+                }else if(response==3){
+                    $('div[name="navainfo"]').css('background-color','#e03550')
+                    clearInterval(t)
+                }
+            }
+        });
+
+    }
+</script>
+</html>

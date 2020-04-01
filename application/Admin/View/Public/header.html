@@ -1,0 +1,24 @@
+    <script type="text/javascript">
+  $(document).ready(function(){
+	  $("#menuDiv1,#menuDiv2,#menuDiv3,#menuDiv4,#menuDiv5").hover(function(){
+		  $(this).css("background-color","#D4D0C8");
+		  $(this).find("div").show();
+	  },function(){
+		  $(this).css("background-color","#E4E9EC");
+		  $(this).find("div").hide();
+	  });
+  });
+  //退出后台
+  function logout()
+  {
+	  if(confirm("是否退出后台管理系统?"))
+	  {
+		  window.location = "index.html?act=logout";
+	  }
+  }
+</script>
+<div class="headDiv">
+  <div class="headDiv1">www.ttnewS.com</div>
+  <div class="headDiv2"><img src="__ROOT__/public/images/Admin/image6.gif"></div>
+</div>
+<div class="headDiv3">&nbsp;</div>

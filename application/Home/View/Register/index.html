@@ -1,0 +1,249 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>注册link</title>
+    <script src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <script src="__ROOT__/public/js/jquery-1.8.0.js"></script>
+    <script src="__ROOT__/public/js/validate/jquery-ui-1.10.3.custom.js" ></script>
+    <link rel="stylesheet" href="__ROOT__/public/js/validate/smoothness/jquery-ui-1.10.3.custom.css" />
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-image: url("__ROOT__/public/images/登录页背景.jpg");
+            background-position-x: 50%;
+            background-position-y: 100%;
+            background-size: initial;
+            background-repeat-x: no-repeat;
+            background-repeat-y: no-repeat;
+            background-attachment: fixed;
+            background-origin: initial;
+            background-clip: initial;
+            background-color: transparent;
+            background-size: 100% 100%;
+        }
+      .wrong{
+            margin-left: 2px;
+            font-size:10px;
+            color:darkred;
+        }
+        .correct{
+            margin-left: 2px;
+            font-size:10px;
+            color:dodgerblue;
+        }
+    </style>
+    <script>
+        $(function(){
+            $("#email").autocomplete({
+                //"source":complete
+                "source":function(request,response){
+                    //request.term 用户输入的内容
+                    //备选邮箱数组
+                    var hosts = ["163.com","126.com","qq.com","189.com","sina.com"];
+                    //用户输入的内容
+                    var term = request.term;
+                    //若用户没有输入@
+                    var name = term; //用户输入的内容 tom
+                    var host; //用户输入的邮箱域名
+                    var result; //response(result)
+                    var ix = term.indexOf("@");//@在用户输入内容中存在的位置
+                    if(ix>-1){
+                        name = term.slice(0,ix); //tom
+                        host = term.slice(ix+1);
+                    }
+                    var findHosts;
+                    if(host){
+
+                        findHosts=$.grep(hosts,function(value,key){
+                            if(value.indexOf(host)>-1){
+                                return value;
+                            }
+                        });
+                    }else{
+                        findHosts=hosts;
+                    }
+                    result = $.map(findHosts,function(value,key){
+                        return name+"@"+value;
+                    });
+                    response(result);
+                }
+            });
+        });
+
+    </script>
+</head>
+<body onload="check()">
+
+<div style="width: 500px;height: 580px;background-color: lightgrey;position: absolute;left: 50%;margin-left: -250px;top: 50%;margin-top: -290px;border-radius: 5px;opacity: 0.9"></div>
+<div style="width: 500px;height: 580px;position: absolute;top: 50%;margin-top: -290px;left: 50%;margin-left: -250px;">
+    <div style="width: 400px;height: 100px;line-height: 100px;text-align:center;">
+        <b style='font-size: 80px;font-family: "arial", "微软雅黑";color: #000000'>we</b><b style='font-size: 80px;font-family: "arial", "微软雅黑";color: rgba(11,73,113,0.85)'>link</b>
+    </div>
+    <div style="width: 458px;height: 400px;">
+        <form name="form1" onsubmit="return check()">
+            <input name="username" id="username" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入用户名">
+            <span></span>
+            <input name="name" id="username1" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入昵称">
+            <span></span>
+            <input type="password" name="password" id="password" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入密码">
+            <span></span>
+            <input name="school" id="degree" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入单位or学校">
+            <span></span>
+            <input name="email" id="email" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入个性邮箱">
+            <span></span>
+            <input name="gexing" id="gexing" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入个性签名">
+            <span></span>
+            <input name="checkCode" id="yzm"  style='width: 200px;height: 35px;margin: 10px auto;margin-left: 25px;background-color: #ffffff;border: 1px solid grey;border-radius: 3px;font-family: "arial", "微软雅黑"' placeholder="请输入二维码">             
+            <div style="width: 100px;height: 35px;background-color: lightgrey;float: right;margin-right: 85px;margin-top: 10px"><img id="myImg" src="__APP__/Register/showcode" onclick="changeImage()" style="cursor:pointer;"title="看不清换一张" alt="看不清换一张"  align="middle"/></div>
+             
+            <input type="submit" style='width: 350px;height: 35px;margin: 10px auto;margin-left: 25px;color: lightgrey;background-color:rgba(11,73,113,0.85);border: 1px solid rgba(11,73,113,0.85);border-radius: 3px;
+        font-family: "arial", "微软雅黑";cursor: pointer' value="注&nbsp;&nbsp;册">
+        </form>
+
+    </div>
+
+    <div style="width: 400px;height: 40px;line-height: 40px;text-align: center;margin-top: 25px;">
+        <a href="__APP__/Index/index"  style="text-decoration: none"><span style='font-size: 10px;font-family: "arial", "微软雅黑";color: dodgerblue;'>返回登录</span></a>
+    </div>
+</div>
+<script>
+    var fobj = document.form1; //获取表单对象
+    var uobj = document.getElementById("username"); 
+    var uspan = getSpan(uobj); 
+    var uobj1 = document.getElementById("username1");
+    var uspan1 = getSpan(uobj1);
+    var pobj = document.getElementById("password");
+    var pspan = getSpan(pobj);
+    var pobj1 = document.getElementById("degree");
+    var pspan1 = getSpan(pobj1);
+    var eobj = document.getElementById("email");
+    var espan = getSpan(eobj);
+    var gobj = document.getElementById("gexing");
+    var gspan = getSpan(gobj);
+    var uflag = false; //用于记录用户名值是否正确
+    var pflag = false;
+    var uflag1 = false;
+    function getSpan(obj){ 
+        while(true){
+            if(obj.nodeName=="SPAN"){
+                return obj;
+            }else{
+                obj = obj.nextSibling; //下一个span
+            }
+        }
+    }
+    function check(){  
+        uobj.onfocus = function(){
+            if(uobj.value==""){
+                uflag = false;
+            }
+        }
+        uobj.onblur = function(){
+            if(uobj.value==""){
+                uspan.innerHTML="用户名为空!";
+                uspan.className = "wrong";
+                uflag = false;
+            }else if(uobj.value.length<6){
+                uspan.innerHTML="长度小于6!";
+                uspan.className="wrong";
+                uflag1 = false;
+            }else{
+                uspan.innerHTML="正确";
+                uspan.className = "correct";
+                uflag1 = true;
+            }
+        }
+        uobj1.onblur = function(){
+            if(uobj1.value==""){
+                uspan1.innerHTML="昵称为空!";
+                uspan1.className = "wrong";
+                uflag = false;
+            }else{
+                uspan1.innerHTML="正确";
+                uspan1.className = "correct";
+                uflag = true;
+            }
+        }
+        pobj.onfocus = function(){
+            if(pobj.value==""){
+                pflag = false;
+            }
+        }
+        pobj.onblur = function(){
+            if(pobj.value==""){
+                pspan.innerHTML="密码为空";
+                pspan.className = "wrong";
+                pflag = false;
+            }else if(pobj.value.length<6){
+                pspan.innerHTML="长度小于6!";
+                pspan.className="wrong";
+                pflag = false;
+            }else{
+                pspan.innerHTML="正确";
+                pspan.className = "correct";
+                pflag = true;
+            }
+        }
+        pobj1.onblur = function(){
+            if(pobj1.value==""){
+                pspan1.innerHTML="单位为空!";
+                pspan1.className = "wrong";
+                pflag = false;
+            }else{
+                pspan1.innerHTML="正确";
+                pspan1.className="correct";
+                pflag = true;
+            }
+        }
+        eobj.onblur = function(){
+            if(eobj.value==""){
+                espan.innerHTML="邮箱为空!";
+                espan.className = "wrong";
+                pflag = false;
+            }else if(!isEmail(eobj.value)){
+                espan.innerHTML="邮箱不合法!";
+                espan.className = "wrong";
+                pflag = false;
+            }else{
+                espan.innerHTML="正确";
+                espan.className = "correct";
+                pflag = true;
+            }
+        }
+       gobj.onblur = function(){
+            if(gobj.value==""){
+                gspan.innerHTML="签名为空!";
+                gspan.className = "wrong";
+                pflag = false;
+            }else{
+                gspan.innerHTML="正确";
+                gspan.className="correct";
+                pflag = true;
+            }
+        }
+        
+        if(uflag==true && pflag==true && uflag1 == true){
+            fobj.action="__APP__/Register/insert";
+            fobj.method="post";
+            fobj.submit();
+        }
+    }
+    function isEmail(s) {
+        var patrn=/\w+([-.]\w+)?@\w+\.(com|cn|net|org)/;
+        if (!patrn.exec(s)) {
+            return false;
+        }else{
+            return true;
+        }
+    }
+    function changeImage(){
+        document.getElementById("myImg").src="__APP__/Register/showcode?id="+new Date();
+    }
+</script>
+
+
+</body>
+</html>

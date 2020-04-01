@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link href="__ROOT__/public/css/Admin/admin.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <style>
+        form table tr {
+            height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 网站的头 -->
+    <include file="Public:header" />
+    <!-- 当前位置 -->
+    <div class="locationDiv">&nbsp;: 后台管理 : 用户管理</div>
+    <!-- 正文内容 -->
+    <div class="mainDiv clear">
+        <!-- 左侧树状列表 -->
+        <include file="Public:left" />
+        <!-- 右侧页面内容 -->
+        <div class="rightDiv">
+            <form name="frm" method="post" action="__APP__/fh/modify/userid/{$rs.userid}">
+                <table border="0" align="center" width="470" bgcolor="#6599FF" style="margin: 30px auto">
+                    <tr>
+                        <td align="left" width="100">用户ID</td>
+                        <td width="170"><input type="text" name="userid" size="20" value="{$rs.userid}" disabled></td>
+                    </tr>
+                    <tr>
+                        <td align="left" width="100">用户名</td>
+                        <td width="170"><input type="text" name="userName" size="20" value="{$rs.username}" disabled></td>
+                    </tr>
+                    <tr>
+                        <td align="left" width="100">姓名</td>
+                        <td width="170"><input type="text" name="name" size="20" value="{$rs.name}" disabled></td>
+                    </tr>
+                    <tr>
+                        <td align="left">封号天数</td>
+                        <td><input type="text" name="day" size="20"></td>
+                    </tr>
+                    <tr>
+                        <td>&nbsp;</td>
+                        <td align="center"><input type="submit" value="提交" class="btn1"> &nbsp;&nbsp;&nbsp; <input type="reset" value="取消" class="btn1"></td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

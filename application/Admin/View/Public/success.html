@@ -1,0 +1,49 @@
+<title>后台管理系统</title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8">
+<link href="__ROOT__/public/css/Admin/admin.css" type="text/css"
+      rel="stylesheet" />
+<script type="text/javascript"
+        src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+
+<script type="text/javascript">
+    var index = 3;
+    function changeTime()
+    {
+        document.getElementById("timeSpan").innerHTML = index;
+        index--;
+        if(index < 0){
+            window.location = "{$jumpUrl}";
+        }
+        else{
+            window.setTimeout("changeTime()",1000);
+        }
+    }
+</script>
+
+</head>
+<body onload="changeTime()">
+<!-- 网站的头 -->
+<include file="Public:header" />
+<!-- 当前位置 -->
+<div class="locationDiv">&nbsp;: 后台管理 : 管理首页</div>
+<!-- 正文内容 -->
+<div class="mainDiv clear">
+    <!-- 左侧树状列表 -->
+    <include file="Public:left" />
+    <!-- 右侧页面内容 -->
+    <div class="rightDiv">
+    <table border="1" align="center" width="600" style="margin: 100px auto">
+        <tr>
+            <td><b>系统提示信息</b></td>
+        </tr>
+        <tr>
+            <td align="center">
+                <br><span style="color: #1d9dd1">{$message}</span> 页面将在 <span id="timeSpan">3</span> 秒钟内自动跳转！<br>
+                <br>如果没有自动跳转，<a href="{$jumpUrl}">请点击这里</a>。<br><br>
+            </td>
+        </tr>
+    </table>
+    </div>
+</div>
+</body>
+</html>

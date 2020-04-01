@@ -1,0 +1,279 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>我的消息</title>
+    <script src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .inform:hover{
+            background-color: dodgerblue;
+        }
+        .小图标{
+            width: 72px;
+            height: 79px;
+            position: fixed;
+            right: 50px;
+            bottom: 100px;
+            cursor: pointer;
+        }
+        #message{
+            width:410px;
+            height: 150px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            border: 1px solid #d3d3d3;
+            margin-top: -75px;
+            margin-left: -205px;
+            border-radius: 3px;
+            opacity: 1
+        }
+    </style>
+    <script>
+        $(function() {
+            $('.personlogo').mouseenter(function () {
+                $('.personlogo').css('color', 'dodgerblue');
+            })
+            $('.personlogo').mouseleave(function () {
+                $('.personlogo').css('color', 'white');
+            })
+            $('.exit').mouseenter(function () {
+                $('.exit').css('color', 'dodgerblue');
+            })
+            $('.exit').mouseleave(function () {
+                $('.exit').css('color', 'white');
+            })
+            $('.search-but').mouseenter(function () {
+                $('.search-but').css('background-color', 'dodgerblue');
+            })
+            $('.search-but').mouseleave(function () {
+                $('.search-but').css('background-color', '#007ed7');
+            })
+            $('input[name="keywords"]').focus(function () {
+                $('input[name="keywords"]').val('');
+                $('input[name="keywords"]').css('color', 'black');
+            })
+
+            $('.hflogo').hover(function(){
+                $(this).css('background-color','rgba(11,73,113,0.85)')
+
+            },function(){
+                $(this).css('background-color','white')
+            })
+
+            $('.pass').hover(function(){
+                $(this).css('background-color','rgba(11,73,113,0.85)')
+
+            },function(){
+                $(this).css('background-color','white')
+            })
+
+            $('.hflogo2').hover(function(){
+                $(this).css('background-color','aliceblue')
+            },function(){
+                $(this).css('background-color','white')
+            });
+
+            $('.hflogo').click(function(){
+                var name = $("#sendname").html();
+                $("[name=sendname]").val(name);
+            })
+
+            $('#return').click(function(){
+            })
+
+            /*返回首页*/
+            $(function () {
+                $(window).scroll(function(){
+                    if ($(window).scrollTop()>100){        /*据顶距离多长出现*/
+                        $("#置顶键").fadeIn(1500);
+                    }
+                    else
+                    {
+                        $("#置顶键").fadeOut(1500);
+                    }
+                });
+//当点击跳转链接后，回到页面顶部位置
+                $("#置顶键").click(function(){
+                    $('body,html').animate({scrollTop:0},1000);   /*置顶的距离以及完成动画的时间*/
+                    return false;             /*可有可无*/
+                });
+            });
+        })
+    </script>
+    <script>
+    // 通过加好友
+        function appove(sendid,receiveid,newsid){
+            $.ajax({
+                "url":"__APP__/Information/add",
+                "type":"post",
+                "data":{
+                    "userid":sendid,
+                    "friendid":receiveid,
+                    "newsid":newsid
+                },
+            "success":function(response){
+                if(response==1){
+                $("#message").css('display','block');
+                $("#message-content").html("添加成功");
+               }else if(response == 0){
+                $("#message").css('display','block');
+                $("#message-content").html("添加失败");
+               }else if(response == 2){
+                $("#message").css('display','block');
+                $("#message-content").html("好友已经添加");
+               }
+               setInterval("daoshu()", 1000);
+            }
+            });
+        }
+        //拒绝
+        function refuse(newsid){
+            $.ajax({
+                "url":"__APP__/Information/refuse",
+                "type":"post",
+                "data":{
+                    "newsid":newsid
+                },
+            "success":function(response){
+                location.reload();
+            }
+            });
+        }
+        function del(newsid){
+            location.href="__APP__/information/delete/newsid/"+newsid;
+        }
+        //导数
+        index = 3;
+        function daoshu(){
+                   index--;
+                if(index < 0)
+                   {
+              //时间到了，跳转页页
+                 location.href="__URL__/index";
+                }
+              }
+    </script>
+    <script>
+    //跳转查看资料首页
+        function jumpUrl(sendid){
+            location.href="__APP__/ForeignHome/index/userid/"+sendid;
+        }
+        function miss(name){
+            location.reload();
+        }
+    </script>
+</head>
+<body bgcolor="#e9e9e9">
+<div id="top-nav" style="width: 100%;height: 50px;background-color: dimgrey;position: fixed;z-index: 3">
+    <div style="width: 1000px;height: 50px;margin: 0 auto/*;background-color: #00ff21*/;position: relative">
+        <div id="left-nav" style="line-height: 50px;display: inline;float: left;">
+            <a href="__APP__/Content/index" style="text-decoration: none;float: left"><b style='font-size: 20px;color: #ffffff;font-family: "arial", "微软雅黑"'>we</b><b style='font-size: 30px;font-family: "arial", "微软雅黑";color:dodgerblue'>Link</b></a>
+            <form method="post" action="__APP__/Search/index/userid/{$info.userid}" style="float: left">
+                <div style="margin-top: 10px;float: left;margin-left: 70px"><input type="text" style="width: 400px;height: 30px;border-radius: 5px;color: lightgray" value="搜索您的朋友或者感兴趣的事" name="keywords"></div>
+                <div style="margin-top: 10px;float: left;margin-left: 5px;">
+                    <input type="submit" value="O" style='width: 50px;height: 30px;background-color: #007ed7;border: 0 solid #000000;border-radius: 5px;color: #ffffff;font-family: "arial", "微软雅黑";font-size: 25px;line-height: 30px;cursor: pointer' class="search-but">
+                </div>
+            </form>
+        </div>
+        <div style="position: absolute;right: 0px;width: 180px;height: 30px;margin-top: 10px">                                                                                                           <!--消失提示-->
+            <div style="width: 35px;height: 30px;float: left;line-height: 30px;" class="inform"><div class="infortx" style="width: 10px;height: 10px;background-color: #ff0000;border-radius: 50%;position: absolute;display: none"></div><a href="__APP__/Content/index"><img src="__ROOT__/public/images/消息logo.PNG"></a></div>
+            <div style="width: 60px;height: 30px;float: left;margin-left: 5px;line-height: 30px"><a href="__APP__/Person/index" style="text-decoration: none"><b style='font-family: "arial", "微软雅黑";color: #ffffff;font-size: 13px' class="personlogo">个人中心</b></a></div>
+            <div style="width: 60px;height: 30px;float: left;margin-left: 5px;line-height: 30px"><a href="__APP__/Index/index" style="text-decoration: none"><b style='font-family: "arial", "微软雅黑";color: #ffffff;font-size: 13px' class="exit">退出</b></a></div>
+        </div>
+    </div>
+</div>
+
+<div id="main" style="width: 1000px;height: auto;background-color: #e9e9e9;position: absolute;top: 70px;left: 50%;margin-left: -500px;">
+    <div style="width: 1000px;height: auto;background-color:rgba(11,73,113,0.85);margin-bottom: 5px"><b style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff;line-height: 50px;margin-left: 10px'>未读请求</b></div>
+    <!--一条未读消息-->
+   <volist name="rs" id="v" key="k">
+    <div style="width: 998px;height: auto;margin-top: 5px;background-color: #ffffff;border: 1px solid lightgrey;float: left">
+        <a href=""><img src="__ROOT__/{$v.sendicon}" style="width: 80px;height: 80px;;float: left;margin-right: 10px;margin: 10px"
+         onclick="jumpUrl({$v.sendid})"></a>
+        <b style='font-size: 20px;font-family: "arial", "微软雅黑";color: rgba(11,73,113,0.85);float: left;;margin-top: 7px;margin-bottom: 10px'><span id="sendname">{$v.sendname}</span></b><br><br>
+        <b style='font-size: 20px;font-family: "arial", "微软雅黑";color: lightgrey;float: left;;margin-top: 7px;margin-bottom: 10px;float: left;margin-left: -60px'>{$v.dateandtime}</b>
+        <div style="width: 850px;height: auto;float: left;"><span style='font-size: 20px;font-family: "arial", "微软雅黑";color: #000000;'>{$v.content}</span>
+        </div>
+        <button class="hflogo"  onclick="refuse({$v.newsid})" style="width: 70px;height: 30px;border: 1px solid dodgerblue;border-radius: 5px;background-color: #ffffff;color: dodgerblue;float: right;margin: 10px;cursor: pointer">拒绝</button>
+        <a class="pass"  href="javascript:appove({$v.sendid},{$v.receiveid},{$v.newsid})" style="width: 70px;height: 28px;border: 1px solid dodgerblue;border-radius: 5px;background-color: #ffffff;color: dodgerblue;float: right;margin: 10px;cursor: pointer;text-align: center;line-height: 28px;text-decoration: none">同意</a>
+    </div>
+   </volist>
+   <!--未读end-->
+   <!-- 已读消息 -->
+     <div style="width: 1000px;height: auto;background-color:rgba(11,73,113,0.85);margin-bottom: 5px"><b style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff;line-height: 50px;margin-left: 10px'>已读请求</b></div>
+    <volist name="rs1" id="v" key="k">
+    <div style="width: 998px;height: auto;margin-top: 5px;background-color: #ffffff;border: 1px solid lightgrey;float: left">
+        <a href=""><img src="__ROOT__/{$v.sendicon}" style="width: 80px;height: 80px;;float: left;margin-right: 10px;margin: 10px"></a>
+        <b style='font-size: 20px;font-family: "arial", "微软雅黑";color: rgba(11,73,113,0.85);float: left;;margin-top: 7px;margin-bottom: 10px'><span id="sendname">{$v.sendname}</span></b><br><br>
+        <b style='font-size: 20px;font-family: "arial", "微软雅黑";color: lightgrey;float: left;;margin-top: 7px;margin-bottom: 10px;float: left;margin-left: -60px'>{$v.dateandtime}</b>
+        <div style="width: 850px;height: auto;float: left;"><span style='font-size: 20px;font-family: "arial", "微软雅黑";color: #000000;'>{$v.content}</span>
+        </div>
+        <button class="hflogo"  onclick="del({$v.newsid})" style="width: 70px;height: 30px;border: 1px solid dodgerblue;border-radius: 5px;background-color: #ffffff;color: dodgerblue;float: right;margin: 10px;cursor: pointer">删除</button>
+    </div>
+   </volist>
+    <!-- 已读消息end -->
+</div>
+<!--回复框-->
+<div style="display: none;" id="huifukuang">
+    <div style="width: 500px;height: 400px;background-color: #ffffff;position: fixed;top: 130px;left: 50%;margin-left: -250px;border: 1px solid lightgrey;box-shadow: 2px 2px 2px lightgrey">
+        <div style="width: 100%;height: 50px;background-color:  rgba(11,73,113,0.85);line-height: 50px;text-align: center;"><b style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff'>消息回复</b></div>
+
+        <form method="post" action="">
+            <div style="margin-top: 30px;margin-left: 10px"><b style='font-family: "arial", "微软雅黑";font-size: 20px'>姓名:</b><input type="text" style="width: 150px;height: 30px;border-radius: 5px;border: 2px solid rgba(11,73,113,0.85);" disabled="disabled" name="sendname"></div>
+            <div style="margin-top: 30px;margin-left: 10px"><b style='font-family: "arial", "微软雅黑";font-size: 20px'>内容:</b><br><br>
+                <textarea type="text" style="width: 480px;height: 150px;border-radius: 5px;border: 2px solid rgba(11,73,113,0.85)"></textarea></div>
+            <input type="submit" style='width: 249px;height: 40px;background-color:  rgba(11,73,113,0.85);line-height: 40px;text-align: center;margin-top: 24px;font-family: "arial", "微软雅黑";color: #ffffff;font-size: 20px;border: 1px solid rgba(11,73,113,0.85);cursor: pointer;float: left;'
+                   value="发&nbsp;&nbsp;&nbsp;送">
+            <div id="return" style='width: 248px;height: 38px;background-color:  rgba(11,73,113,0.85);line-height: 40px;text-align: center;margin-top: 24px;font-family: "arial", "微软雅黑";color: #ffffff;font-size: 20px;border: 1px solid rgba(11,73,113,0.85);cursor: pointer;float: left'>返回</div>
+        </form>
+    </div>
+    <!--回复end-->
+</div>
+<!--返回顶部-->
+<div id="置顶键" style="display: none;">
+    <img src="__ROOT__/public/images/返回顶部.PNG" class="小图标">
+</div>
+<!-- 提示框 -->
+<div id = "message" style="display: none;background-color: white">
+ <div style="width: 100%;height: 50px;background-color:  rgba(44,97,131,1);line-height: 50px;text-align: center;"><b style='font-family: "arial", "微软雅黑";font-size: 20px;color: #ffffff'>提示消息</b>
+ </div>
+<span style="display: inline-block; width: 100%;height: 60px; text-align: center; line-height: 100px; font:40px 'microsoft yahei';color:#696969; " id="message-content"></span>
+<input  onclick = "miss('message')"class="hflogo2" type="button" value="关闭" style="width: 70px;height: 30px; border:1px solid dodgerblue;border-radius: 5px;float: right;cursor: ;pointer;background-color: white; margin-right: 10px;margin-bottom: 10px;" />
+ </div>
+</body>
+</html>
+<!--即时通讯-->
+<script>
+    $().ready(function(){
+        t=setInterval("show()",3500);
+    })
+</script>
+<script>
+    function show() {
+        $.ajax({
+            "url":"__APP__/Content/info",
+            cache:false,
+            dataType:"html",
+            "type":"post",
+            /*"data":"username=jack&password=3",*/
+            "data":{
+                "p":1
+            },
+            "success":function(response,status,xhr){
+                //若ajax.php输出值为1，则在ｐ标签总写入ｙｅｓ，
+                //否则写入no
+                if(response==1) {
+                    $(".infortx").css('display','block');
+                    clearInterval(t)
+                }else {
+                    $(".infortx").css('display','none');
+                }
+            }
+        });
+
+    }
+</script>

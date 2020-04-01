@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link href="__ROOT__/public/css/Admin/admin.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+</head>
+
+<body>
+    <!-- 网站的头 -->
+    <include file="Public:header" />
+
+    <!-- 当前位置 -->
+    <div class="locationDiv">&nbsp;: 新闻管理 :用户管理</div>
+
+    <!-- 正文内容 -->
+    <div class="mainDiv clear">
+
+        <!-- 左侧树状列表 -->
+        <div class="leftDiv">
+            <include file="Public:left" />
+        </div>
+
+        <!-- 右侧页面内容 -->
+        <div class="rightDiv">
+            <br>
+            <form name="frm" method="post" action="__APP__/search/index">
+                <input type="hidden" name="currentPage" value="1">
+                <table border="0" align="center" width="700" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="left">
+                            &nbsp;用户搜索：<input type="text" name="value" size="30">
+                            <select name="searchType">
+	                        <option value='name' selected>姓名</option>"
+                            <option value='username'>账户名</option>"
+      </select>
+                            <input type="submit" value="搜索">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <br>
+            <table border="1" align="center" width="750" cellpadding="0" cellspacing="0">
+                <tr height="30" style="font-weight:bold;">
+                    <td>账户名</td>
+                    <td>姓名</td>
+                    <td>学校</td>
+                    <td>邮箱</td>
+                    <td>个性签名</td>
+                    <td>注册时间</td>
+                    <td>状态</td>
+                    <td colspan="3" align="center">操作</td>
+                </tr>
+                <volist id="v" name="rs" key="k">
+                    <tr height="25">
+                        <td>
+                            {$v.username}
+                        </td>
+                        <td>
+                            {$v.name}
+                        </td>
+                        <td>
+                            {$v.school}
+                        </td>
+                        <td>
+                            {$v.email}
+                        </td>
+                        <td>
+                            {$v.gexing}
+                        </td>
+                        <td>
+                            {$v.dateandtime}
+                        </td>
+                        <td>
+                            <switch name="v.power">
+                                <case value="1">正常</case>
+                                <case value="0">已封号</case>
+                            </switch>
+                        </td>
+                        <td><a href="__APP__/Fh/index/userid/{$v.userid}">封号</a></td>
+                        <td><a href="__APP__/Fh/jf/userid/{$v.userid}">解封</a></td>
+                        <!--<td><a href="javascript:del({$v.userid})">删除</a></td>-->
+                    </tr>
+                </volist>
+                <tr height="25">
+                    <td colspan="10" align="left">
+                        {$show}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+<script>
+    function del(userid) {
+        if (confirm('是否删除')) {
+            location.href = "__APP__/content/del/userid/" + userid;
+        }
+    }
+</script>

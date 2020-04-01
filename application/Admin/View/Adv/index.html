@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <title>后台管理系统</title>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <link href="__ROOT__/public/css/Admin/admin.css" type="text/css" rel="stylesheet" />
+    <script type="text/javascript" src="__ROOT__/public/js/jquery-3.1.0.min.js"></script>
+    <style>
+        .mis {
+            display: none;
+        }
+        
+        .show {
+            display: block;
+        }
+    </style>
+    <script type="text/javascript">
+        function show(id_str) {
+            var arr = document.getElementsByTagName('table');
+            arr[0].className = "mis";
+            arr[1].className = "mis";
+            var obj = document.getElementById(id_str);
+            obj.className = "show";
+        }
+    </script>
+</head>
+
+<body>
+    <include file="Public:header" />
+    <!-- 当前位置 -->
+    <div class="locationDiv">&nbsp;: 后台管理 : 轮播图片管理</div>
+    <!-- 正文内容 -->
+    <div class="mainDiv clear">
+
+        <include file="Public:left" />
+        <!-- 左侧树状列表 -->
+        <!-- 右侧页面内容 -->
+        <div class="rightDiv">
+            <style type="text/css">
+                #table_lunbo1 {
+                    border-color: #aaa;
+                    border-collapse: collapse;
+                    text-align: center;
+                    margin-top: 10px;
+                }
+                
+                #table_lunbo1 img {
+                    width: 400px;
+                    height: 100px;
+                }
+                
+                #table_lunbo1 a {
+                    color: blue;
+                    text-decoration: none;
+                }
+                
+                #table_lunbo1 a:hover {
+                    color: red;
+                    text-decoration: underline;
+                }
+                
+                .tr_css {
+                    font-size: 10px
+                }
+            </style>
+
+            <span style="font-size: 30px">广告轮播页管理</span>
+
+            <table id="table_lunbo1" border="1px" class="show" ;>
+                <tr class="tr_css">
+                    <th width="100px">ID</th>
+                    <th width="400px">图片</th>
+                    <th width="200px">描述</th>
+                    <th width="100px">链接</th>
+                    <th width="150px">操作</th>
+                </tr>
+                <foreach name="rs1" item="v" key="k">
+                    <tr>
+                        <td>{$v['picid']}</td>
+                        <td><img src="/welink/{$v['picpath']}"></td>
+                        <td>{$v['des']}</td>
+                        <td><a href="{$v['link']}">广告地址</a></td>
+                        <td><a class="button border-main" href="__APP__/adv/modify/picId/{$v['picid']}"><span style="background-color: white;">修改</span></a>
+                        </td>
+                    </tr>
+                </foreach>
+            </table>
+        </div>
+    </div>
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,133 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录</title>
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        .wrong{
+            margin-left: 23px;
+            font-size:10px;
+            color:#ff0000;
+        }
+        .correct{
+            margin-left: 23px;
+            font-size:10px;
+            color:#00ff00;
+        }
+    </style>
+</head>
+<body onload="check()">
+<img src="__ROOT__/public/images/后台背景.jpg" style="width: 100%;height: 100%">
+<div style="width: 400px;height: 330px;position: absolute;top: 50%;margin-top: -165px;left: 50%;margin-left: -200px
+    ;border-radius: 10px;background-color: rgba(255, 255, 255, 0.5);">
+    <form  name="form1" onsubmit="return check()">
+        <div style="width: 100%;height: 50px;text-align: center"><b style="line-height: 50px;font-size: 30px;color: #000000;">weLink后台登录</b></div>
+
+        <br><input type="text" name="username" id="username"  placeholder="请输入账号" style="border: 2px solid darkgrey;background-color: #ffffff;width: 250px;height: 38px;margin-left: 23px;margin-top: 5px;" />
+
+        <span></span>
+
+        <br><input type="password" name="password" id="password" placeholder="请输入密码" style="border: 2px solid darkgrey;background-color: #ffffff;width: 250px;height: 38px;margin-left: 23px;margin-top: 15px;" />
+
+        <span></span>
+
+        <br><input type="text" name="checkCode" id="yzm" placeholder=" 请输入验证码" maxlength="4" style="border: 2px solid darkgrey;background-color: #ffffff;width: 150px;height: 38px;margin-left: 23px;margin-top: 15px;"/>&nbsp;
+        <img id="myImg" src="__APP__/Index/showcode" onclick="changeImage()" style="cursor:pointer;"title="看不清换一张" alt="看不清换一张"  align="middle"/>
+
+        <br><span></span>
+
+        <br><input type="submit"  value="登录" style='background-color: #007ed7;width: 250px;height: 38px;border: 1px solid #ffffff;margin-left: 75px;margin-top: 15px;color: #ffffff;font-size: 20px;font-family: "arial", "微软雅黑"' />
+    </form>
+</div>
+<script>
+    var fobj = document.form1; //获取表单对象
+    var uobj = document.getElementById("username"); //获取两个输入框对象
+    var uspan = getSpan(uobj); //获取username后面的span标签对象
+    var pobj = document.getElementById("password");
+    var pspan = getSpan(pobj);
+    var yobj = document.getElementById("yzm");
+    var yspan = getSpan(yobj);
+    var uflag = false; //用于记录用户名值是否正确
+    var pflag = false;
+    var yflag = false;
+    function getSpan(obj){  //获取当前对象(obj)的下一个span
+        while(true){
+            if(obj.nodeName=="SPAN"){
+                return obj;
+            }else{
+                obj = obj.nextSibling; //下一个span
+            }
+        }
+    }
+    function check(){  //自定义函数check完成form表单验证和提交
+        uobj.onfocus = function(){
+            if(uobj.value==""){
+                uflag = false;
+            }
+        }
+        uobj.onblur = function(){
+            if(uobj.value==""){
+                uspan.innerHTML="用户名不能为空";
+                uspan.className = "wrong";
+                uflag = false;
+            }else if(uobj.value.length<3){
+                uspan.innerHTML="长度小于3";
+                uspan.className="wrong";
+                uflag = false;
+            }else{
+                uspan.innerHTML="正确";
+                uspan.className = "correct";
+                uflag = true;
+            }
+        }
+        pobj.onfocus = function(){
+            if(pobj.value==""){
+                pflag = false;
+            }
+        }
+        pobj.onblur = function(){
+            if(pobj.value==""){
+                pspan.innerHTML="密码不能为空";
+                pspan.className = "wrong";
+                pflag = false;
+            }else if(pobj.value.length<3){
+                pspan.innerHTML="长度小于3";
+                pspan.className="wrong";
+                pflag = false;
+            }else{
+                pspan.innerHTML="正确";
+                pspan.className = "correct";
+                pflag = true;
+            }
+        }
+        yobj.onfocus = function(){
+            if(yobj.value==""){
+                yflag = false;
+            }
+        }
+        yobj.onblur = function(){
+            if(yobj.value==""){
+                yspan.innerHTML="验证码不能为空";
+                yspan.className = "wrong";
+                yflag = false;
+            }else{
+                yspan.innerHTML="";
+                yspan.className = "correct";
+                yflag = true;
+            }
+        }
+        if(uflag==true &&pflag==true&&yflag==true){
+            fobj.action="__APP__/Index/checkLogin.html";
+            fobj.method="post";
+            fobj.submit();
+        }
+    }
+    function changeImage(){
+        document.getElementById("myImg").src="__APP__/Index/showcode?id="+new Date();
+    }
+</script>
+</body>
+</html>
